@@ -1,18 +1,11 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
-import dtImage from "../images/DT.jpg";
-import Image from "next/image";
+import TrainersList from "../components/TrainersList";
 
 export default function Trainers() {
   return (
     <Box>
-      {/* <Image
-        fill
-        src={dtImage}
-        alt="DTimg"
-        style={{
-          objectFit: "cover", zIndex: "-1", }} /> */}
-      <Typography variant="h3" align="center">
+      <Typography variant="h3" align="center" sx={{ fontWeight: "bold" }}>
         Coach
       </Typography>
       <Divider
@@ -20,10 +13,12 @@ export default function Trainers() {
           borderBottomWidth: "4px",
           width: "60px",
           mx: "auto",
+          mb: "50px",
           pt: "20px",
           borderColor: "red",
         }}
       />
+      <TrainersList />
     </Box>
   );
 }
