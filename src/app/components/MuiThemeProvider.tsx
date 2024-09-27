@@ -43,7 +43,7 @@ export default function MuiThemeProvider({ children }: Props) {
         contrastText: "#FFFFFF",
       },
       background: {
-        default: "white",
+        default: "#FCFFE7",
       },
     },
     components: {

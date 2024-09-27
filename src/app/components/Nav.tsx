@@ -101,7 +101,7 @@ export default function Nav() {
                   {endChar}
                 </Typography>
               </Button>
-            )
+            ),
           )}
         </Box>
       </Toolbar>
