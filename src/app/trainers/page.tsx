@@ -13,7 +13,7 @@ export default function Trainers() {
       {isMobile ? (
         <Box>
           <Typography variant="h2" align="center" sx={{ fontWeight: "bold" }}>
-            Entrenadores
+            Coach
           </Typography>
           <Divider
             sx={{
@@ -30,7 +30,7 @@ export default function Trainers() {
       ) : (
         <Box>
           <Typography variant="h3" align="center" sx={{ fontWeight: "bold" }}>
-            Entrenadores
+            Coach
           </Typography>
           <Divider
             sx={{
