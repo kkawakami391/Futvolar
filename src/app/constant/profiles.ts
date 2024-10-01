@@ -1,0 +1,3 @@
+export const kawakamiProfileText =
+  "Es un reconocido director técnico japonés con una destacada trayectoria en el desarrollo de jóvenes talentos en el fútbol. Con años de experiencia en la formación y dirección de equipos. Actualmente, lidera programas que permiten a jóvenes futbolistas japoneses perfeccionar sus habilidades en el extranjero, especialmente en Argentina, contribuyendo al crecimiento del fútbol a nivel internacional. Su pasión por el deporte y su dedicación a la formación integral de jugadores lo han convertido en una figura respetada en el ámbito del fútbol juvenil.";
+export const kawakamiName = "Kawakami Yasushi";

@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import React from "react";
-import { pages } from "../constant/pages";
+import { pages, paths } from "../constant/pages";
 import splitText from "../utils/formatNaviText";
 import { NavSplitTitle } from "../models/Nav";
+import { useRouter } from "next/navigation";
 
 declare module "@mui/material/AppBar" {
   interface AppBarPropsColorOverrides {
@@ -20,13 +21,16 @@ declare module "@mui/material/AppBar" {
 }
 
 export default function Nav() {
+  const router = useRouter();
+  // Css de los bordes de las letras de los items del Nav
   const borderCss =
     "1px 0 grey, -1px 0 grey, 1px 0 grey, -1px 0 grey, 1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black";
 
   const navArray: NavSplitTitle[] = [];
-  pages.forEach((page) => {
-    const array = splitText(page);
-    navArray.push(array);
+  pages.forEach((page, i) => {
+    const navTitle = splitText(page);
+    const navTitleWithPath = { ...navTitle, path: paths[i] };
+    navArray.push(navTitleWithPath);
   });
 
   return (
@@ -55,47 +59,50 @@ export default function Nav() {
           </Typography>
         </IconButton>
         <Box sx={{ flexGrow: "1", display: "flex", mt: "4px" }}>
-          {navArray.map(({ title: { startChar, midChar, endChar } }, i) => (
-            <Button
-              key={i}
-              sx={{
-                "&:hover": {
-                  "& #center_color": {
-                    color: "yellow",
+          {navArray.map(
+            ({ title: { startChar, midChar, endChar }, path }, i) => (
+              <Button
+                onClick={() => router.push(path)}
+                key={i}
+                sx={{
+                  "&:hover": {
+                    "& #center_color": {
+                      color: "yellow",
+                    },
                   },
-                },
-              }}
-            >
-              <Typography
-                color="white"
-                sx={{
-                  fontWeight: "bold",
-                  textShadow: borderCss,
                 }}
               >
-                {startChar}
-              </Typography>
-              <Typography
-                id="center_color"
-                color="white"
-                sx={{
-                  fontWeight: "bold",
-                  textShadow: borderCss,
-                }}
-              >
-                {midChar}
-              </Typography>
-              <Typography
-                color="white"
-                sx={{
-                  fontWeight: "bold",
-                  textShadow: borderCss,
-                }}
-              >
-                {endChar}
-              </Typography>
-            </Button>
-          ))}
+                <Typography
+                  color="white"
+                  sx={{
+                    fontWeight: "bold",
+                    textShadow: borderCss,
+                  }}
+                >
+                  {startChar}
+                </Typography>
+                <Typography
+                  id="center_color"
+                  color="white"
+                  sx={{
+                    fontWeight: "bold",
+                    textShadow: borderCss,
+                  }}
+                >
+                  {midChar}
+                </Typography>
+                <Typography
+                  color="white"
+                  sx={{
+                    fontWeight: "bold",
+                    textShadow: borderCss,
+                  }}
+                >
+                  {endChar}
+                </Typography>
+              </Button>
+            ),
+          )}
         </Box>
       </Toolbar>
     </AppBar>

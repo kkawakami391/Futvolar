@@ -4,4 +4,5 @@ export type NavSplitTitle = {
     midChar: string;
     endChar: string;
   };
+  path: string;
 };
