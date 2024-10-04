@@ -28,9 +28,8 @@ export default function Nav() {
 
   const navArray: NavSplitTitle[] = [];
   pages.forEach((page, i) => {
-    const navTitle = splitText(page);
-    const navTitleWithPath = { ...navTitle, path: paths[i] };
-    navArray.push(navTitleWithPath);
+    const navTitle = splitText(page, i);
+    navArray.push(navTitle);
   });
 
   return (
