@@ -4,12 +4,17 @@ import {
   AppBar,
   Box,
   Button,
+  Drawer,
   IconButton,
+  List,
+  ListItem,
+  ListItemButton,
   Toolbar,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
 import SportsSoccerIcon from "@mui/icons-material/SportsSoccer";
 import React, { useState } from "react";
 import { pages } from "../constant/pages";
@@ -50,11 +55,10 @@ export default function Nav() {
   return (
     <AppBar position="fixed" color="blueLight">
       {isMobile ? (
-        <Toolbar
-          sx={{
-            justifyContent: "space-between",
-          }}
-        >
+        <Toolbar>
+          <IconButton onClick={() => toggleDrawer(true)}>
+            <MenuIcon sx={{ color: "black" }} />
+          </IconButton>
           <IconButton size="large" onClick={() => router.push("/")}>
             <SportsSoccerIcon fontSize="large" />
             <Typography
@@ -73,52 +77,121 @@ export default function Nav() {
               lar
             </Typography>
           </IconButton>
-          <Box sx={{ flexGrow: "1", display: "flex", mt: "4px" }}>
-            {navArray.map(
-              ({ title: { startChar, midChar, endChar }, path }, i) => (
-                <Button
-                  onClick={() => router.push(path)}
-                  key={i}
+          <Drawer
+            open={open}
+            onClose={() => toggleDrawer(false)}
+            PaperProps={{
+              sx: {
+                backgroundColor: theme.palette.blueLight.main,
+              },
+            }}
+          >
+            <Box onClick={() => toggleDrawer(false)}>
+              <List sx={{ py: 0 }}>
+                <ListItemButton
+                  onClick={() => router.push("/")}
                   sx={{
-                    "&:hover": {
-                      "& #center_color": {
-                        color: "yellow",
-                      },
-                    },
+                    backgroundColor: theme.palette.blueLight.main,
+                    borderRadius: 0,
+                    mx: 0,
                   }}
                 >
+                  <SportsSoccerIcon fontSize="large" />
                   <Typography
                     color="white"
+                    variant="h4"
                     sx={{
+                      ml: "10px",
                       fontWeight: "bold",
                       textShadow: borderCss,
                     }}
                   >
-                    {startChar}
+                    Futv
                   </Typography>
+                  <SportsSoccerIcon
+                    fontSize="medium"
+                    sx={{ m: 0, color: "yellow" }}
+                  />
                   <Typography
-                    id="center_color"
                     color="white"
+                    variant="h4"
                     sx={{
                       fontWeight: "bold",
+                      flexGrow: "1",
                       textShadow: borderCss,
                     }}
                   >
-                    {midChar}
+                    lar
                   </Typography>
-                  <Typography
-                    color="white"
-                    sx={{
-                      fontWeight: "bold",
-                      textShadow: borderCss,
-                    }}
-                  >
-                    {endChar}
-                  </Typography>
-                </Button>
-              )
-            )}
-          </Box>
+                </ListItemButton>
+                {navArray.map(
+                  ({ title: { startChar, midChar, endChar }, path }, i) => (
+                    <ListItem
+                      key={i}
+                      sx={{
+                        backgroundColor: theme.palette.blueLight.main,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        py: "0",
+                      }}
+                    >
+                      <Box>
+                        <Button
+                          onClick={() => router.push(path)}
+                          sx={{
+                            ":hover": {
+                              "& #center_color": {
+                                color: "yellow",
+                              },
+                              borderBottom: "3px solid white",
+                            },
+                            pt: 2,
+                          }}
+                        >
+                          <Typography
+                            variant="h6"
+                            sx={{
+                              fontWeight: "bold",
+                              textShadow: borderCss,
+                              color: "white",
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {startChar}
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            id="center_color"
+                            sx={{
+                              fontWeight: "bold",
+                              textShadow: borderCss,
+                              color: "white",
+                              textTransform: "lowercase",
+                            }}
+                          >
+                            {midChar}
+                          </Typography>
+                          <Typography
+                            variant="h6"
+                            color="white"
+                            sx={{
+                              fontWeight: "bold",
+                              textShadow: borderCss,
+                              color: "white",
+                              textTransform: "lowercase",
+                            }}
+                          >
+                            {endChar}
+                          </Typography>
+                        </Button>
+                      </Box>
+                    </ListItem>
+                  )
+                )}
+              </List>
+            </Box>
+          </Drawer>
         </Toolbar>
       ) : (
         <Toolbar
@@ -130,15 +203,18 @@ export default function Nav() {
             <SportsSoccerIcon fontSize="large" />
             <Typography
               color="white"
-              variant="h5"
+              variant="h4"
               sx={{ ml: "10px", fontWeight: "bold", textShadow: borderCss }}
             >
               Futv
             </Typography>
-            <SportsSoccerIcon fontSize="small" sx={{ m: 0, color: "yellow" }} />
+            <SportsSoccerIcon
+              fontSize="medium"
+              sx={{ m: 0, color: "yellow" }}
+            />
             <Typography
               color="white"
-              variant="h5"
+              variant="h4"
               sx={{ fontWeight: "bold", flexGrow: "1", textShadow: borderCss }}
             >
               lar
@@ -155,14 +231,18 @@ export default function Nav() {
                       "& #center_color": {
                         color: "yellow",
                       },
+                      borderBottom: "3px solid white",
+                      pb: "0",
                     },
                   }}
                 >
                   <Typography
                     color="white"
+                    variant="h6"
                     sx={{
                       fontWeight: "bold",
                       textShadow: borderCss,
+                      textTransform: "capitalize",
                     }}
                   >
                     {startChar}
@@ -170,18 +250,22 @@ export default function Nav() {
                   <Typography
                     id="center_color"
                     color="white"
+                    variant="h6"
                     sx={{
                       fontWeight: "bold",
                       textShadow: borderCss,
+                      textTransform: "lowercase",
                     }}
                   >
                     {midChar}
                   </Typography>
                   <Typography
                     color="white"
+                    variant="h6"
                     sx={{
                       fontWeight: "bold",
                       textShadow: borderCss,
+                      textTransform: "lowercase",
                     }}
                   >
                     {endChar}
