@@ -11,6 +11,7 @@ interface Props {
 declare module "@mui/material/styles" {
   interface Palette {
     blue: Palette["primary"];
+    blueLight: Palette["primary"];
     brown: Palette["secondary"];
     red: Palette["primary"];
   }
