@@ -1,6 +1,8 @@
 // Viene un string "Caracteristicas" y quiero conseguir la parte del centro de esos string para poder cambiarlo de color.
 // Deberia obtener los nombres de las categorias y despues usarlo como key de la siguiente manera?
 
+import { paths } from "../constant/pages";
+
 // const formattedCategories = [
 //   {
 //     Categorias: {
@@ -11,7 +13,7 @@
 //   },
 // ];
 
-export default function splitText(title: string) {
+export default function splitText(title: string, i: number) {
   const charLength = title.length;
   const char40Percent = (charLength * 40) / 100;
   const char20Percent = (charLength * 30) / 100;
@@ -24,5 +26,6 @@ export default function splitText(title: string) {
       midChar,
       endChar,
     },
+    path: paths[i], // Agregue los paths del URL para utilizarlo en el onClick de los elementos del Nav
   };
 }
